@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {% block content %} {% load crispy_forms_tags %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 card mt-3 left top">
+      <div class="card-body">
+        <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
+        <p class="text-muted">{{ post.author }} | {{ post.created_on }}</p>
+        <p class="card-text">{{ post.content | safe }}</p>
+      </div>
+    </div>
+    {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+
+    <div class="col-md-8 card mb-4 mt-3">
+      <div class="card-body">
+        {% with comments.count as total_comments %}
+        <h2>
+          {% if total_comments == 0 %} Não há comentários {% else %} 
+          {{ total_comments }} comentários {% endif %}
+        </h2>
+        <p>{% endwith %} {% for comment in comments %}</p>
+        <div class="comments" style="padding: 10px">
+          <p class="font-weight-bold">{{ comment.name }}</p>
+          <span class="text-muted font-weight-normal">
+            {{ comment.created_on }}
+          </span>
+          <p>{{ comment.body | linebreaks }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="col-md-8 card mb-4 mt-3">
+      <div class="card-body">
+        {% if new_comment %}
+        <div class="alert alert-success" role="alert">
+          Seu comentário está aguardando pela moderação
+        </div>
+        {% else %}
+        <h1>Adicionar comentário</h1>
+        <form method="post" style="margin-top: 1.3em">
+          {{ comment_form | crispy }} {% csrf_token %}
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
