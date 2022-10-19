@@ -1,8 +1,8 @@
 # Django Blog
 
-![screenshot](.github/images/Screenshot_20221015_201003.png)
+![screenshot](.github/images/Screenshot_20221019_184758.png)
 
-![screenshot](.github/images/Screenshot_20221015_201039.png)
+![screenshot](.github/images/Screenshot_20221019_184812.png)
 
 
 ## Install packages using pip
