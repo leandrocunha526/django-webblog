@@ -16,10 +16,18 @@
       <div class="card-body">
         {% with comments.count as total_comments %}
         <h2>
-          {% if total_comments == 0 %} Não há comentários {% else %} 
-          {{ total_comments }} comentários {% endif %}
+          {% if total_comments > 1 %} {{total_comments}} comentários
         </h2>
-        <p>{% endwith %} {% for comment in comments %}</p>
+        
+        <h2>{% elif total_comments == 1 %}{{total_comments}} comentário
+        {% endif %}</h2>
+        
+        {% endwith %}
+        
+        {% if comments.count == 0 %}
+          <h3>Desculpe, não há comentários nesta publicação.</h3>
+        {% endif %}
+        <p>{% for comment in comments %}</p>
         <div class="comments" style="padding: 10px">
           <p class="font-weight-bold">{{ comment.name }}</p>
           <p class="text-muted">Autor: {{ comment.email }}</p>

@@ -10,11 +10,12 @@
                     <div class="card-body">
                         <h2 class="card-title">{{ post.title }}</h2>
                         <p class="card-text text-muted h6">Categoria: {{ post.category }}</p>
-                        <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}}  </p>
+                        <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}}</p>
                         <p class="card-text">{{post.content|safe|slice:":200" }}</p>
                         <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Leia mais &rarr;</a>
                     </div>
                 </div>
+                {% empty %}<p class="card-text text-muted h6">Não há publicações ainda...</p>
             {% endfor %}
         </div>
         {% block sidebar %}
